@@ -11,7 +11,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         VALUES ('$nama', '$kategori', $harga, $stok)";
 
     if (mysqli_query($conn, $query)) {
-        header("Location: index.php");
+        echo "<script>
+            alert('Data berhasil ditambah!');
+            window.location.href = 'index.php';
+            </script>";
         exit;
     } else {
         echo "Gagal menambah data!";
@@ -33,17 +36,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input type="text" name="nama_barang" required>
 
             <label>Kategori</label>
-            <input type="text" name="kategori">
+            <select name="kategori" >
+                <option value="" disabled selected>-- Pilih Kategori --</option>
+                <option value="Laptop">💻 Laptop</option>
+                <option value="Tablet">📱 Tablet</option>
+                <option value="Smartphone">📲 Smartphone</option>
+                <option value="Aksesoris">🖱️ Aksesoris</option>
+                <option value="Elektronik">⚡ Elektronik</option>
+                <option value="Peripheral">⌨️ Peripheral</option>
+            </select>
 
             <label>Harga</label>
-            <input type="number" name="harga" required>
+            <input type=number" name="harga" required>
 
             <label>Stok</label>
             <input type="number" name="stok" required>
-
-            <button type="submit" class="btn-simpan">Simpan</button>
+            
+            <button type="submit" class="btn-simpan" name="btn-simpan">Simpan</button>
+            
             <a href="index.php" class="back-link">← Kembali</a>
         </form>
+        
     </div>
 </body>
 </html>

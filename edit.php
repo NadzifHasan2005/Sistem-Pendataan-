@@ -10,11 +10,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $harga    = (int) $_POST['harga'];
     $stok     = (int) $_POST['stok'];
 
-    $query = "UPDATE barang SET nama_barang='$nama', kategori='$kategori',
-              harga=$harga, stok=$stok WHERE id=$id";
+    $query = "UPDATE barang SET nama_barang='$nama', kategori='$kategori', harga=$harga, stok=$stok WHERE id=$id";
 
     if (mysqli_query($conn, $query)) {
-        header("Location: index.php");
+        echo "<script>
+            alert('Data berhasil diedit!');
+            window.location.href = 'index.php';
+            </script>";
         exit;
     } else {
         echo "Gagal update data!";
@@ -34,9 +36,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <form method="POST">
             <label>Nama Barang</label>
             <input type="text" name="nama_barang" value="<?= $data['nama_barang'] ?>" required>
-
+            
             <label>Kategori</label>
-            <input type="text" name="kategori" value="<?= $data['kategori'] ?>">
+            <select name="kategori" class="form-category">
+                <option value="" disabled>-- Pilih Kategori --</option>
+                <option value="Laptop"     <?= $data['kategori'] == 'Laptop'     ? 'selected' : '' ?>>💻 Laptop</option>
+                <option value="Tablet"     <?= $data['kategori'] == 'Tablet'     ? 'selected' : '' ?>>📱 Tablet</option>
+                <option value="Smartphone" <?= $data['kategori'] == 'Smartphone' ? 'selected' : '' ?>>📲 Smartphone</option>
+                <option value="Aksesoris"  <?= $data['kategori'] == 'Aksesoris'  ? 'selected' : '' ?>>🖱️ Aksesoris</option>
+                <option value="Elektronik" <?= $data['kategori'] == 'Elektronik' ? 'selected' : '' ?>>⚡ Elektronik</option>
+                <option value="Peripheral" <?= $data['kategori'] == 'Peripheral' ? 'selected' : '' ?>>⌨️ Peripheral</option>
+            </select>
 
             <label>Harga</label>
             <input type="number" name="harga" value="<?= $data['harga'] ?>" required>
