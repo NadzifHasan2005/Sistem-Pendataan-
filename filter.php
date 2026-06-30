@@ -1,6 +1,8 @@
 <?php
 // File ini berisi LOGIC untuk membangun query filter
 // Variabel $conn harus sudah ada (dari koneksi.php yang di-include duluan)
+include 'filter.php';    // ← ERROR! $conn belum ada
+include 'koneksi.php';
 
 $where = [];
 
